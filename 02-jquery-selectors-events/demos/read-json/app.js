@@ -14,7 +14,7 @@ Dog.prototype.render = function() {
   // make a new section
   $('main').append('<section class="clone"></section>');
   const $dogClone = $('section[class="clone"]');
-  
+
   // get the html of the template
   const $dogHtml = $('#dog-template').html();
 
@@ -30,12 +30,12 @@ Dog.prototype.render = function() {
 }
 
 Dog.readJson = () => {
-  $.get('data.json')
+  $.get('data.json', 'json')
     .then(data => {
       data.forEach(dog => {
         Dog.allDogs.push( new Dog(dog) );
       })
-    }, 'json')
+    })
     .then( Dog.loadDogs )
 }
 
