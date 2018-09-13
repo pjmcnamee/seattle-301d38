@@ -10,3 +10,8 @@ img {
 h1 {
   text-align: center;
 }
+
+.icon-bug {
+  color: red;
+  font-size: 50px;
+}

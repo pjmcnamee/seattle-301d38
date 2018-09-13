@@ -9,18 +9,14 @@ function Dog(dogObject) {
 Dog.allDogs = [];
 
 Dog.prototype.render = function() {
-  $('main').append('<section class="clone"></section>');
-  const $dogClone = $('section[class="clone"]');
+  // 1. Get the HTML from the template
+  const $source = $('#dog-template').html();
 
-  const $dogHtml = $('#dog-template').html();
+  // 2. Compile the source with Handlebars
+  const compiledSource = Handlebars.compile( $source );
 
-  $dogClone.html( $dogHtml );
-
-  $dogClone.find('h2').text(this.name);
-  $dogClone.find('img').attr('src', this.image_url);
-  $dogClone.find('p').text(this.hobbies);
-  $dogClone.removeClass('clone');
-  $dogClone.addClass(this.name);
+  // 3. Return the HTML from the compile method
+  return compiledSource(this);
 }
 
 Dog.readJson = () => {
@@ -34,7 +30,7 @@ Dog.readJson = () => {
 }
 
 Dog.loadDogs = () => {
-  Dog.allDogs.forEach(dog => dog.render());
+  Dog.allDogs.forEach(dog => $('#dogs').append( dog.render() ));
 }
 
 $(() => Dog.readJson());
